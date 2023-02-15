@@ -47,16 +47,13 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class=" ">
-  
+<body id="top" data-spy="scroll" data-offset="70" data-target="#navbar-main" class=" ">
   <script>window.staDarkLightChooser = true;</script>
   <script>const isSiteThemeDark = false;</script>
   <script src="/js/load-theme.js"></script>
-
   <aside class="search-results" id="search">
     <div class="container">
       <section class="search-header">
-
         <div class="row no-gutters justify-content-between mb-3">
           <div class="col-6">
             <h1>Search</h1>
@@ -65,59 +62,52 @@
             <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
           </div>
         </div>
-
         <div id="search-box">
-          
-          <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-          autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
-          
+          <input name="q" id="search-query" placeholder="Search..." autocapitalize="off" autocomplete="off"
+            autocorrect="off" spellcheck="false" type="search" class="form-control">
         </div>
-
       </section>
       <section class="section-search-results">
-
         <div id="search-hits">
-          
         </div>
-
       </section>
     </div>
   </aside>
-  
+
   <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
     <div class="container">
       <div class="d-none d-lg-inline-flex">
         <a class="navbar-brand" href="/">Nur Jamiludin Ramadhan</a>
       </div>
-          
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-      <span><i class="fas fa-bars"></i></span>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-content"
+        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
       </button>
-          
       <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
         <a class="navbar-brand" href="/">Nur Jamiludin Ramadhan</a>
       </div>
-          
-      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">    
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
         <ul class="navbar-nav d-md-inline-flex">
           <li class="nav-item">
-            <a class="nav-link " href="/#about"><span>Home</span></a>
+            <a class="nav-link " href="/#about" data-target="#about"><span>Home</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/#publications"><span>Publications</span></a>
+            <a class="nav-link " href="/#publications" data-target="#publications"><span>Publications</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+            <a class="nav-link " href="/#learning_module" data-target="#learning_module"><span>Learning Module</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact" data-target="#contact"><span>Contact</span></a>
           </li>
         </ul>
       </div>
 
-      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">    
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
         <li class="nav-item">
-          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search"
+              aria-hidden="true"></i></a>
         </li>
-        
         <li class="nav-item dropdown theme-dropdown">
           <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
             <i class="fas fa-palette" aria-hidden="true"></i>
@@ -135,182 +125,181 @@
           </div>
         </li>
       </ul>
-
     </div>
   </nav>
 
-<div class="universal-wrapper pt-3">
-  <h1>Publications</h1>
+  <div class="universal-wrapper pt-3">
+    <h1>Publications</h1>
+  </div>
 
-</div>
+  <div class="universal-wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-row mb-4">
+          <div class="col-auto">
+            <input type="search" class="filter-search" placeholder="Search..." autocapitalize="off"
+            autocomplete="off" autocorrect="off" role="textbox" spellcheck="false">
+          </div>
+          <div class="col-auto">
+            <select class="pub-filters pubtype-select form-control form-control-sm" data-filter-group="pubtype">
+              <option value="*">Type</option>
+              
+              <option value=".pubtype-0">
+                Uncategorized
+              </option>
+              
+              <option value=".pubtype-1">
+                Journal paper
+              </option>
 
-<div class="universal-wrapper">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="form-row mb-4">
-        <div class="col-auto">
-          <input type="search" class="filter-search" placeholder="Search..." autocapitalize="off"
-          autocomplete="off" autocorrect="off" role="textbox" spellcheck="false">
+              <option value=".pubtype-2">
+                Conference paper
+              </option>
+              
+              <option value=".pubtype-3">
+                Preprint
+              </option>
+              
+            </select>
+          </div>
+          <div class="col-auto">
+            <select class="pub-filters form-control form-control-sm" data-filter-group="year">
+              <option value="*">Date</option>
+              <option value=".year-2023">
+                2023
+              </option>
+              
+              <option value=".year-2022">
+                2022
+              </option>
+              
+              <option value=".year-2021">
+                2021
+              </option>
+              
+              <option value=".year-2020">
+                2020
+              </option>
+            </select>
+          </div>
         </div>
-        <div class="col-auto">
-          <select class="pub-filters pubtype-select form-control form-control-sm" data-filter-group="pubtype">
-            <option value="*">Type</option>
-            
-            <option value=".pubtype-0">
-              Uncategorized
-            </option>
-            
-            <option value=".pubtype-1">
-              Journal paper
-            </option>
 
-            <option value=".pubtype-2">
-              Conference paper
-            </option>
-            
-            <option value=".pubtype-3">
-              Preprint
-            </option>
-            
-          </select>
+        <div id="container-publications">        
+          
+          <div class="grid-sizer col-lg-12 isotope-item pubtype-1 year-2022">
+            <div class="media stream-item">
+              <div class="media-body">
+                <h3 class="article-title mb-0 mt-0">
+                  <a href="/publication/pat-rec/" >Pattern recognition based movement control and gripping forces control system on arm robot model using LabVIEW</a>
+                </h3>             
+                <a href="/publication/pat-rec/" class="summary-link">
+                  <div class="article-style">
+                    Most arm robot has an inefficient operating time because it requires operator to input destination coordinates. Besides, main problem of arm robot is objects vulnerability when it is manipulated by the robot. 
+                              This research goals is to develop an arm robot control system which has ability to automatically detect object using image processing in order to reduce operating time. 
+                              It is also able to control gripping force for eliminating damage to objects caused by robot gripper …
+                  </div>
+                </a>            
+                <div class="stream-meta article-metadata">
+                  <div>
+                    <span>Nur Jamiludin Ramadhan</span>, <span>Noval Lilansa</span>, <span>Afaf Fadhil</span>, <span>Nguyen Dinh Hoe</span>
+                  </div>
+                </div>
+                <div class="btn-links">
+                  <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
+                    href="https://www.researchgate.net/publication/362366387_Pattern_recognition_based_movement_control_and_gripping_forces_control_system_on_arm_robot_model_using_LabVIEW" target="_blank" rel="noopener">
+                    PDF
+                  </a>
+                  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/nj-ramadhan"
+                    target="_blank" rel="noopener">
+                    Code
+                  </a>
+                  <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
+                    href="https://www.researchgate.net/publication/362366387_Pattern_recognition_based_movement_control_and_gripping_forces_control_system_on_arm_robot_model_using_LabVIEW"
+                    target="_blank" rel="noopener">
+                    Poster
+                  </a>
+                </div>
+              </div>
+            </div>  
+          </div>  
+
+          <div class="grid-sizer col-lg-12 isotope-item pubtype-3 year-2023">
+            <div class="media stream-item">
+              <div class="media-body">
+                <h3 class="article-title mb-0 mt-0">
+                  <a href="/publication/pms-cnc/" >Five-Axis PMS CNC Partial Link Control System based on Modified Inverse Kinematic of 6-DOF UPS Parallel Manipulator</a>
+                </h3>             
+                <a href="/publication/pms-cnc/" class="summary-link">
+                  <div class="article-style">
+                    Parallel manipulator structures have kinematic configurations with closed chain types, meaning that each arm is connected to the origin. 
+                    Parallel structures provide better performance than serial structures in terms of accuracy, acceleration at high speed, and stiffness. 
+                    These characteristics enable the implementation of a parallel manipulator as a new concept for the motion mechanism of five-axis CNC milling machines.  …
+                  </div>
+                </a>            
+                <div class="stream-meta article-metadata">
+                  <div>
+                    <span>Nur Jamiludin Ramadhan</span>, <span>Indrawanto</span>, <span>Nguyen Dinh Hoe</span>
+                  </div>
+                </div>
+                <div class="btn-links">
+                  <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
+                    href="https://www.researchgate.net/publication/367212566_Five-Axis_PMS_CNC_Partial_Link_Control_System_based_on_Modified_Inverse_Kinematic_of_6-DOF_UPS_Parallel_Manipulator" target="_blank" rel="noopener">
+                    PDF
+                  </a>
+                  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/nj-ramadhan"
+                    target="_blank" rel="noopener">
+                    Code
+                  </a>
+                  <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
+                    href="https://www.researchgate.net/publication/367212566_Five-Axis_PMS_CNC_Partial_Link_Control_System_based_on_Modified_Inverse_Kinematic_of_6-DOF_UPS_Parallel_Manipulator"
+                    target="_blank" rel="noopener">
+                    Poster
+                  </a>
+                </div>
+              </div>
+            </div>  
+          </div>  
+
+          <div class="grid-sizer col-lg-12 isotope-item pubtype-1 year-2023">
+            <div class="media stream-item">
+              <div class="media-body">
+                <h3 class="article-title mb-0 mt-0">
+                  <a href="/publication/mul-rob/" >Implementation Consensus Algorithm and Leader-Follower of Multi-Robot System Formation</a>
+                </h3>             
+                <a href="/publication/mul-rob/" class="summary-link">
+                  <div class="article-style">
+                    Robot technology has recently been applied to many applications to help human activities. 
+                    Mobile Robot is one of the most flexible robot technology. 
+                    This research uses a mobile robot designed using an omnidirectional wheel for the movement mechanism. 
+                    Coordination and control of multi-robots can be assigned to perform any task from a different kind of field. 
+                    Therefore, this paper aims to develop a multi-robot system to form a formation to do the task. 
+                    The multi-robot system consists of three units Mobile Robot. …
+                  </div>
+                </a>            
+                <div class="stream-meta article-metadata">
+                  <div>
+                    <span>Noval Lilansa</span>, <span>Muhammad Nursyam Rizal</span>, <span>Pipit Anggraeni</span>, <span>Nur Jamiludin Ramadhan</span>
+                  </div>
+                </div>
+                <div class="btn-links">
+                  <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
+                    href="https://www.researchgate.net/publication/367212566_Five-Axis_PMS_CNC_Partial_Link_Control_System_based_on_Modified_Inverse_Kinematic_of_6-DOF_UPS_Parallel_Manipulatorhttps://www.researchgate.net/publication/367420568_Implementation_consensus_algorithm_and_leader-follower_of_multi-robot_system_formation" target="_blank" rel="noopener">
+                    PDF
+                  </a>
+                  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/nj-ramadhan"
+                    target="_blank" rel="noopener">
+                    Code
+                  </a>
+                  <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
+                    href="https://www.researchgate.net/publication/367420568_Implementation_consensus_algorithm_and_leader-follower_of_multi-robot_system_formation"
+                    target="_blank" rel="noopener">
+                    Poster
+                  </a>
+                </div>
+              </div>
+            </div>  
+          </div> 
         </div>
-        <div class="col-auto">
-          <select class="pub-filters form-control form-control-sm" data-filter-group="year">
-            <option value="*">Date</option>
-            <option value=".year-2023">
-              2023
-            </option>
-            
-            <option value=".year-2022">
-              2022
-            </option>
-            
-            <option value=".year-2021">
-              2021
-            </option>
-            
-            <option value=".year-2020">
-              2020
-            </option>
-          </select>
-        </div>
-      </div>
-
-      <div id="container-publications">        
-        
-        <div class="grid-sizer col-lg-12 isotope-item pubtype-1 year-2022">
-          <div class="media stream-item">
-            <div class="media-body">
-              <h3 class="article-title mb-0 mt-0">
-                <a href="/publication/pat-rec/" >Pattern recognition based movement control and gripping forces control system on arm robot model using LabVIEW</a>
-              </h3>             
-              <a href="/publication/pat-rec/" class="summary-link">
-                <div class="article-style">
-                  Most arm robot has an inefficient operating time because it requires operator to input destination coordinates. Besides, main problem of arm robot is objects vulnerability when it is manipulated by the robot. 
-                            This research goals is to develop an arm robot control system which has ability to automatically detect object using image processing in order to reduce operating time. 
-                            It is also able to control gripping force for eliminating damage to objects caused by robot gripper …
-                </div>
-              </a>            
-              <div class="stream-meta article-metadata">
-                <div>
-                  <span>Nur Jamiludin Ramadhan</span>, <span>Noval Lilansa</span>, <span>Afaf Fadhil</span>, <span>Nguyen Dinh Hoe</span>
-                </div>
-              </div>
-              <div class="btn-links">
-                <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
-                  href="https://www.researchgate.net/publication/362366387_Pattern_recognition_based_movement_control_and_gripping_forces_control_system_on_arm_robot_model_using_LabVIEW" target="_blank" rel="noopener">
-                  PDF
-                </a>
-                <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/nj-ramadhan"
-                  target="_blank" rel="noopener">
-                  Code
-                </a>
-                <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
-                  href="https://www.researchgate.net/publication/362366387_Pattern_recognition_based_movement_control_and_gripping_forces_control_system_on_arm_robot_model_using_LabVIEW"
-                  target="_blank" rel="noopener">
-                  Poster
-                </a>
-              </div>
-            </div>
-          </div>  
-        </div>  
-
-        <div class="grid-sizer col-lg-12 isotope-item pubtype-3 year-2023">
-          <div class="media stream-item">
-            <div class="media-body">
-              <h3 class="article-title mb-0 mt-0">
-                <a href="/publication/pms-cnc/" >Five-Axis PMS CNC Partial Link Control System based on Modified Inverse Kinematic of 6-DOF UPS Parallel Manipulator</a>
-              </h3>             
-              <a href="/publication/pms-cnc/" class="summary-link">
-                <div class="article-style">
-                  Parallel manipulator structures have kinematic configurations with closed chain types, meaning that each arm is connected to the origin. 
-                  Parallel structures provide better performance than serial structures in terms of accuracy, acceleration at high speed, and stiffness. 
-                  These characteristics enable the implementation of a parallel manipulator as a new concept for the motion mechanism of five-axis CNC milling machines.  …
-                </div>
-              </a>            
-              <div class="stream-meta article-metadata">
-                <div>
-                  <span>Nur Jamiludin Ramadhan</span>, <span>Indrawanto</span>, <span>Nguyen Dinh Hoe</span>
-                </div>
-              </div>
-              <div class="btn-links">
-                <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
-                  href="https://www.researchgate.net/publication/367212566_Five-Axis_PMS_CNC_Partial_Link_Control_System_based_on_Modified_Inverse_Kinematic_of_6-DOF_UPS_Parallel_Manipulator" target="_blank" rel="noopener">
-                  PDF
-                </a>
-                <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/nj-ramadhan"
-                  target="_blank" rel="noopener">
-                  Code
-                </a>
-                <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
-                  href="https://www.researchgate.net/publication/367212566_Five-Axis_PMS_CNC_Partial_Link_Control_System_based_on_Modified_Inverse_Kinematic_of_6-DOF_UPS_Parallel_Manipulator"
-                  target="_blank" rel="noopener">
-                  Poster
-                </a>
-              </div>
-            </div>
-          </div>  
-        </div>  
-
-        <div class="grid-sizer col-lg-12 isotope-item pubtype-1 year-2023">
-          <div class="media stream-item">
-            <div class="media-body">
-              <h3 class="article-title mb-0 mt-0">
-                <a href="/publication/mul-rob/" >Implementation Consensus Algorithm and Leader-Follower of Multi-Robot System Formation</a>
-              </h3>             
-              <a href="/publication/mul-rob/" class="summary-link">
-                <div class="article-style">
-                  Robot technology has recently been applied to many applications to help human activities. 
-                  Mobile Robot is one of the most flexible robot technology. 
-                  This research uses a mobile robot designed using an omnidirectional wheel for the movement mechanism. 
-                  Coordination and control of multi-robots can be assigned to perform any task from a different kind of field. 
-                  Therefore, this paper aims to develop a multi-robot system to form a formation to do the task. 
-                  The multi-robot system consists of three units Mobile Robot. …
-                </div>
-              </a>            
-              <div class="stream-meta article-metadata">
-                <div>
-                  <span>Noval Lilansa</span>, <span>Muhammad Nursyam Rizal</span>, <span>Pipit Anggraeni</span>, <span>Nur Jamiludin Ramadhan</span>
-                </div>
-              </div>
-              <div class="btn-links">
-                <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
-                  href="https://www.researchgate.net/publication/367212566_Five-Axis_PMS_CNC_Partial_Link_Control_System_based_on_Modified_Inverse_Kinematic_of_6-DOF_UPS_Parallel_Manipulatorhttps://www.researchgate.net/publication/367420568_Implementation_consensus_algorithm_and_leader-follower_of_multi-robot_system_formation" target="_blank" rel="noopener">
-                  PDF
-                </a>
-                <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/nj-ramadhan"
-                  target="_blank" rel="noopener">
-                  Code
-                </a>
-                <a class="btn btn-outline-primary my-1 mr-1 btn-sm"
-                  href="https://www.researchgate.net/publication/367420568_Implementation_consensus_algorithm_and_leader-follower_of_multi-robot_system_formation"
-                  target="_blank" rel="noopener">
-                  Poster
-                </a>
-              </div>
-            </div>
-          </div>  
-        </div> 
       </div>
     </div>  
   </div>
