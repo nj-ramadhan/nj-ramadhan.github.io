@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>3 | Mohamed Elawady Webpage</title>
-    <link>https://mawady.github.io/publication-type/3/</link>
-      <atom:link href="https://mawady.github.io/publication-type/3/index.xml" rel="self" type="application/rss+xml" />
+    <title>3 | Nur Jamiludin Ramadhan</title>
+    <link>https://nj-ramadhan.github.io/publication-type/3/</link>
+      <atom:link href="https://nj-ramadhan.github.io/publication-type/3/index.xml" rel="self" type="application/rss+xml" />
     <description>3</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Thu, 12 Jun 2014 03:51:24 +0200</lastBuildDate>
     <image>
-      <url>https://mawady.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <url>https://nj-ramadhan.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>3</title>
-      <link>https://mawady.github.io/publication-type/3/</link>
+      <link>https://nj-ramadhan.github.io/publication-type/3/</link>
     </image>
     
     <item>
-      <title>Sparse Coral Classification Using Deep Convolutional Neural Networks</title>
-      <link>https://mawady.github.io/publication/coral-msc/</link>
+      <title>CURe-Mi Mobile Manipulator Robot for Contact-less COVID-19 Patients Serving Missions</title>
+      <link>https://nj-ramadhan.github.io/publication/cur-mi/</link>
       <pubDate>Thu, 12 Jun 2014 03:51:24 +0200</pubDate>
-      <guid>https://mawady.github.io/publication/coral-msc/</guid>
+      <guid>https://nj-ramadhan.github.io/publication/cur-mi/</guid>
       <description></description>
     </item>
     
