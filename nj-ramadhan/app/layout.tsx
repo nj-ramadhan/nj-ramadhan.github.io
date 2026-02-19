@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from 'next/script'
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./academic.css";
@@ -20,16 +21,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>
+        {/* Inline scripts must be handled using the id and strategy props */}
+        <Script id="theme-config" strategy="beforeInteractive">
+          {`
+            window.staDarkLightChooser = true;
+            window.isSiteThemeDark = false; 
+          `}
+        </Script>
+      </head>
+      <body>
         {children}
+        {/* Load the external theme script */}
+        <Script src="/js/load-theme.js" strategy="afterInteractive" />
       </body>
     </html>
-  );
+  )
 }
