@@ -41,16 +41,23 @@ Read my latest posts in the [blog](./blog) section.
 - GitHub: [@nj-ramadhan](https://github.com/nj-ramadhan)
 - Email: [nj-ramadhan@polman-bandung.ac.id](mailto:nj-ramadhan@polman-bandung.ac.id)
 
+
+## Creating Project
+To try develop new web app type
+
+    npx create-next-app@latest  
+
+
 ## Deploy
 
 To locally deploy the web, build and then run the project with this command
 
-        npm run build
-        npx serve@latest out
+    npm run build
+    npx serve@latest out
 
 Or to run the development server:
 
-        npm run dev
+    npm run dev
 
 
 ## License
