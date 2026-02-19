@@ -7,24 +7,36 @@ export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('auto');
+  const [mounted, setMounted] = useState(false);
 
-  // Initialize theme
+  // Initialize theme only on client side
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'auto' || 'auto';
+    setMounted(true);
+    const savedTheme = (localStorage.getItem('theme') as 'light' | 'dark' | 'auto') || 'auto';
     setTheme(savedTheme);
     applyTheme(savedTheme);
   }, []);
 
   // Apply theme to document
   const applyTheme = (newTheme: 'light' | 'dark' | 'auto') => {
-    const isDark = newTheme === 'dark' || 
-      (newTheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (typeof window === 'undefined') return;
     
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    const html = document.documentElement;
+    
+    // Remove all theme classes first
+    html.classList.remove('dark', 'light');
+    
+    if (newTheme === 'dark') {
+      html.classList.add('dark');
+    } else if (newTheme === 'light') {
+      html.classList.add('light');
+    } else if (newTheme === 'auto') {
+      // For auto, don't add any class - let CSS media query handle it
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        html.classList.add('dark');
+      }
     }
+    
     localStorage.setItem('theme', newTheme);
   };
 
@@ -38,32 +50,41 @@ export default function Home() {
     setSearchQuery(e.target.value);
   };
 
+  // Don't render theme switcher until mounted to avoid hydration mismatch
+  if (!mounted) return null;
+
   return (
-    <main className="flex min-h-screen w-full flex-col bg-white dark:bg-black text-gray-900 dark:text-white">
+    <main style={{ backgroundColor: 'var(--bg)', color: 'var(--text)' }} className="min-h-screen w-full flex flex-col">
       {/* Search Panel */}
       {searchOpen && (
-        <aside className="fixed inset-0 z-40 bg-black/50 dark:bg-black/70 p-6 md:p-12">
-          <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+        <aside style={{ backgroundColor: 'rgba(0,0,0,0.5)' }} className="fixed inset-0 z-40 p-6 md:p-12">
+          <div style={{ backgroundColor: 'var(--card-bg)', color: 'var(--text)', borderColor: 'var(--border)' }} className="max-w-2xl mx-auto rounded-lg shadow-lg p-6 border">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Search</h2>
               <button
                 onClick={() => setSearchOpen(false)}
-                className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                style={{ color: 'var(--muted)' }}
+                className="hover:opacity-70"
               >
                 ✕
               </button>
             </div>
             <input
               type="search"
-              placeholder="Search publications, learning materials..."
+              placeholder="Search publications, lecture materials..."
               value={searchQuery}
               onChange={handleSearch}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              style={{ 
+                backgroundColor: 'var(--bg)', 
+                color: 'var(--text)', 
+                borderColor: 'var(--border)' 
+              }}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               autoFocus
             />
-            <div className="mt-4 text-gray-600 dark:text-gray-400">
+            <div style={{ color: 'var(--muted)' }} className="mt-4">
               {searchQuery ? (
-                <p>Results for: <span className="font-semibold">{searchQuery}</span></p>
+                <p>Results for: <span className="font-semibold" style={{ color: 'var(--text)' }}>{searchQuery}</span></p>
               ) : (
                 <p>Type to search...</p>
               )}
@@ -73,31 +94,31 @@ export default function Home() {
       )}
 
       {/* Navigation */}
-      <nav className="sticky top-0 z-30 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
+      <nav style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--border)' }} className="sticky top-0 z-30 border-b">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="/" className="font-bold text-lg hover:text-blue-600 dark:hover:text-blue-400">
+          <a href="/" style={{ color: 'var(--text)' }} className="font-bold text-lg hover:text-blue-600">
             Nur Jamiludin Ramadhan
           </a>
 
           {/* Menu */}
           <ul className="hidden md:flex gap-6">
             <li>
-              <a href="#about" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
-                Home
+              <a href="#about" style={{ color: 'var(--muted)' }} className="hover:text-blue-600">
+                About
               </a>
             </li>
             <li>
-              <a href="#publications" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+              <a href="#publications" style={{ color: 'var(--muted)' }} className="hover:text-blue-600">
                 Publications
               </a>
             </li>
             <li>
-              <a href="#learning_materials" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
-                Learning Materials
+              <a href="#lecture_materials" style={{ color: 'var(--muted)' }} className="hover:text-blue-600">
+                Lecture Materials
               </a>
             </li>
             <li>
-              <a href="#contact" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+              <a href="#contact" style={{ color: 'var(--muted)' }} className="hover:text-blue-600">
                 Contact
               </a>
             </li>
@@ -107,7 +128,8 @@ export default function Home() {
           <div className="flex gap-4 items-center">
             <button
               onClick={() => setSearchOpen(true)}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg"
+              style={{ color: 'var(--text)' }}
+              className="p-2 hover:bg-gray-100 rounded-lg"
               aria-label="Search"
             >
               🔍
@@ -115,33 +137,30 @@ export default function Home() {
 
             {/* Theme Switcher */}
             <div className="relative group">
-              <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg">
+              <button style={{ color: 'var(--text)' }} className="p-2 hover:bg-gray-100 rounded-lg">
                 🎨
               </button>
-              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              <div style={{ backgroundColor: 'var(--card-bg)', color: 'var(--text)', borderColor: 'var(--border)' }} className="absolute right-0 mt-2 w-48 border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
                 <button
                   onClick={() => handleThemeChange('light')}
-                  className={`block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                    theme === 'light' ? 'font-bold text-blue-600' : ''
-                  }`}
+                  style={{ backgroundColor: theme === 'light' ? 'var(--hover-bg)' : 'transparent' }}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                 >
-                  ☀️ Light
+                  ☀️ Light {theme === 'light' && '✓'}
                 </button>
                 <button
                   onClick={() => handleThemeChange('dark')}
-                  className={`block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                    theme === 'dark' ? 'font-bold text-blue-600' : ''
-                  }`}
+                  style={{ backgroundColor: theme === 'dark' ? 'var(--hover-bg)' : 'transparent' }}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                 >
-                  🌙 Dark
+                  🌙 Dark {theme === 'dark' && '✓'}
                 </button>
                 <button
                   onClick={() => handleThemeChange('auto')}
-                  className={`block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                    theme === 'auto' ? 'font-bold text-blue-600' : ''
-                  }`}
+                  style={{ backgroundColor: theme === 'auto' ? 'var(--hover-bg)' : 'transparent' }}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                 >
-                  🔄 Auto
+                  🔄 Auto {theme === 'auto' && '✓'}
                 </button>
               </div>
             </div>
@@ -159,40 +178,71 @@ export default function Home() {
               alt="Nur Jamiludin Ramadhan"
               width={200}
               height={200}
-              className="rounded-full mb-4 border-4 border-gray-200 dark:border-gray-800"
+              className="rounded-full mb-4 border-4"
+              style={{ borderColor: 'var(--border)' }}
             />
             <h2 className="text-2xl font-bold mb-2 text-center">Nur Jamiludin Ramadhan</h2>
-            <p className="text-center text-gray-600 dark:text-gray-400 mb-4">
+            <p style={{ color: 'var(--muted)' }} className="text-center mb-4">
               Lecturer and Researcher in Manufacturing Automation and Mechatronics Engineering Department
             </p>
             <a
               href="https://www.polman-bandung.ac.id"
               target="_blank"
               rel="noopener"
-              className="text-blue-600 dark:text-blue-400 hover:underline mb-6"
+              className="text-blue-600 hover:underline mb-6"
             >
               Bandung Polytechnic for Manufacturing
             </a>
 
             {/* Social Links */}
             <div className="flex gap-3 flex-wrap justify-center">
-              <a href="#contact" title="Email" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg">
-                ✉️
+              <a href="#contact" title="Email" style={{ backgroundColor: 'var(--hover-bg)' }} className="p-2 rounded-lg hover:opacity-70">
+                <Image
+                  src="/images/icon/icon-gmail.png"
+                  alt="email_nj-rmadhan"
+                  width={20}
+                  height={20}
+                />
               </a>
-              <a href="https://www.linkedin.com/in/nj-ramadhan/" target="_blank" rel="noopener" title="LinkedIn" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg">
-                💼
+              <a href="https://www.linkedin.com/in/nj-ramadhan/" target="_blank" rel="noopener" title="LinkedIn" style={{ backgroundColor: 'var(--hover-bg)' }} className="p-2 rounded-lg hover:opacity-70">
+                <Image
+                  src="/images/icon/icon-linkedin.png"
+                  alt="linkedin_nj-ramadhan"
+                  width={20}
+                  height={20}
+                />
               </a>
-              <a href="https://github.com/nj-ramadhan" target="_blank" rel="noopener" title="GitHub" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg">
-                🐙
+              <a href="https://github.com/nj-ramadhan" target="_blank" rel="noopener" title="GitHub" style={{ backgroundColor: 'var(--hover-bg)' }} className="p-2 rounded-lg hover:opacity-70">
+                <Image
+                  src="/images/icon/icon-github.png"
+                  alt="github_nj-ramadhan"
+                  width={20}
+                  height={20}
+                />
               </a>
-              <a href="https://orcid.org/0000-0002-0909-0503" target="_blank" rel="noopener" title="ORCID" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg">
-                🎓
+              <a href="https://orcid.org/0000-0002-0909-0503" target="_blank" rel="noopener" title="ORCID" style={{ backgroundColor: 'var(--hover-bg)' }} className="p-2 rounded-lg hover:opacity-70">
+                <Image
+                  src="/images/icon/icon-orcid.png"
+                  alt="orcid_nj-ramadhan"
+                  width={20}
+                  height={20}
+                />
               </a>
-              <a href="https://scholar.google.com/citations?user=d6-6t88AAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg">
-                📚
+              <a href="https://scholar.google.com/citations?user=d6-6t88AAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar" style={{ backgroundColor: 'var(--hover-bg)' }} className="p-2 rounded-lg hover:opacity-70">
+                <Image
+                  src="/images/icon/icon-gscholar.png"
+                  alt="google_scholar_nj-ramadhan"
+                  width={20}
+                  height={20}
+                />
               </a>
-              <a href="https://www.researchgate.net/profile/Nur-Ramadhan-9" target="_blank" rel="noopener" title="ResearchGate" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg">
-                🔬
+              <a href="https://www.researchgate.net/profile/Nur-Ramadhan-9" target="_blank" rel="noopener" title="ResearchGate" style={{ backgroundColor: 'var(--hover-bg)' }} className="p-2 rounded-lg hover:opacity-70">
+                <Image
+                  src="/images/icon/icon-researchgate.png"
+                  alt="researchgate_nj-ramadhan"
+                  width={20}
+                  height={20}
+                />
               </a>
             </div>
           </div>
@@ -200,39 +250,38 @@ export default function Home() {
           {/* Bio */}
           <div className="md:col-span-2">
             <h1 className="text-4xl font-bold mb-6">Biography</h1>
-            <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+            <p style={{ color: 'var(--text)' }} className="mb-6 leading-relaxed">
               I am a Lecturer and Researcher in Manufacturing Automation and Mechatronics Engineering Department at Bandung Polytechnic for Manufacturing. 
               My research focus on Mechatronics and Robotics system implementation for Flexible and Intelligent Manufacturing Environment. 
-              Previously, I was a lead researcher at parallel robot implementation as a machine tools mechanism. 
-              I am currently working on the partial link actuator control system optimization for parallel mechanism system machine tools.
+              Previously, I was a lead researcher at parallel robot implementation as a machine tools mechanism, Autonomous Mobile Robot implementation in manufacturing environment.
             </p>
 
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-xl font-bold mb-4">Interests</h3>
-                <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>• Robotics</li>
-                  <li>• Parallel Robot</li>
-                  <li>• Mechatronics</li>
-                  <li>• Flexible Manufacturing</li>
-                  <li>• Intelligent Manufacturing</li>
+                <ul style={{ color: 'var(--text)' }} className="space-y-2 list-disc list-inside ml-5">
+                  <li>Robotics</li>
+                  <li>Parallel Robot</li>
+                  <li>Mechatronics</li>
+                  <li>Flexible Manufacturing</li>
+                  <li>Intelligent Manufacturing</li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-xl font-bold mb-4">Education</h3>
-                <ul className="space-y-3 text-gray-700 dark:text-gray-300">
+                <ul style={{ color: 'var(--text)' }} className="space-y-3">
                   <li>
-                    <p className="font-semibold">Master Degree in Mechanical Engineering</p>
-                    <p className="text-sm">Bandung Institute of Technology, 2019</p>
+                    <p className="font-semibold">Master Degree in Mechanical Engineering (Mechatronics Research Group)</p>
+                    <p style={{ color: 'var(--muted)' }} className="text-sm">Bandung Institute of Technology, 2019</p>
                   </li>
                   <li>
-                    <p className="font-semibold">Bachelor Degree in Manufacturing Automation</p>
-                    <p className="text-sm">Bandung Polytechnic for Manufacturing, 2016</p>
+                    <p className="font-semibold">Bachelor Degree in Manufacturing Automation & Mechatronics Engineering</p>
+                    <p style={{ color: 'var(--muted)' }} className="text-sm">Bandung Polytechnic for Manufacturing, 2016</p>
                   </li>
                   <li>
-                    <p className="font-semibold">Diploma Degree in Manufacturing Automation</p>
-                    <p className="text-sm">Bandung Polytechnic for Manufacturing, 2015</p>
+                    <p className="font-semibold">Diploma Degree in Manufacturing Automation & Mechatronics Engineering</p>
+                    <p style={{ color: 'var(--muted)' }} className="text-sm">Bandung Polytechnic for Manufacturing, 2015</p>
                   </li>
                 </ul>
               </div>
@@ -242,10 +291,10 @@ export default function Home() {
       </section>
 
       {/* Publications Section */}
-      <section id="publications" className="py-20 px-6 md:px-12 max-w-6xl mx-auto border-t border-gray-200 dark:border-gray-800">
+      <section id="publications" style={{ borderColor: 'var(--border)' }} className="py-20 px-6 md:px-12 max-w-6xl mx-auto border-t">
         <h1 className="text-4xl font-bold mb-2">Recent Publications</h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
-          <a href="/publication/" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <p style={{ color: 'var(--muted)' }} className="mb-8">
+          <a href="/publication/" className="text-blue-600 hover:underline">
             View all publications →
           </a>
         </p>
@@ -274,19 +323,19 @@ export default function Home() {
               researchgate: "https://www.researchgate.net/publication/367420568",
             },
           ].map((pub, idx) => (
-            <article key={idx} className="border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:shadow-lg transition">
+            <article key={idx} style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)' }} className="border rounded-lg p-6 hover:shadow-lg transition">
               <h3 className="text-xl font-semibold mb-2">
-                <a href={pub.link} className="text-blue-600 dark:text-blue-400 hover:underline">
+                <a href={pub.link} className="text-blue-600 hover:underline">
                   {pub.title}
                 </a>
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{pub.authors}</p>
-              <p className="text-gray-700 dark:text-gray-300 mb-4">{pub.excerpt}</p>
+              <p style={{ color: 'var(--muted)' }} className="text-sm mb-3">{pub.authors}</p>
+              <p style={{ color: 'var(--text)' }} className="mb-4">{pub.excerpt}</p>
               <div className="flex gap-3 flex-wrap">
-                <a href={pub.link} className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
-                  View
+                <a href={pub.link} style={{ borderColor: 'var(--border)' }} className="px-3 py-1 border rounded hover:bg-blue-600 hover:text-white text-sm">
+                  View Details
                 </a>
-                <a href={pub.researchgate} target="_blank" rel="noopener" className="px-3 py-1 border border-gray-300 dark:border-gray-700 rounded hover:bg-gray-100 dark:hover:bg-gray-900 text-sm">
+                <a href={pub.researchgate} target="_blank" rel="noopener" style={{ borderColor: 'var(--border)' }} className="px-3 py-1 border rounded hover:bg-blue-600 hover:text-white text-sm">
                   ResearchGate
                 </a>
               </div>
@@ -295,11 +344,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Learning Materials Section */}
-      <section id="learning_materials" className="py-20 px-6 md:px-12 max-w-6xl mx-auto border-t border-gray-200 dark:border-gray-800">
-        <h1 className="text-4xl font-bold mb-2">Learning Materials</h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
-          <a href="/learning/" className="text-blue-600 dark:text-blue-400 hover:underline">
+      {/* Lecture Materials Section */}
+      <section id="lecture_materials" style={{ borderColor: 'var(--border)' }} className="py-20 px-6 md:px-12 max-w-6xl mx-auto border-t">
+        <h1 className="text-4xl font-bold mb-2">Lecture Materials</h1>
+        <p style={{ color: 'var(--muted)' }} className="mb-8">
+          <a href="/lecture/" className="text-blue-600 hover:underline">
             View all materials →
           </a>
         </p>
@@ -309,7 +358,7 @@ export default function Home() {
             {
               title: "Engineering Mechanics - Statics",
               link: "https://sites.google.com/ae.polman-bandung.ac.id/mekanikateknikstatika/beranda",
-              excerpt: "Units and quantities of rigid bodies, forces, moments, equilibrium analysis, and center of mass calculations."
+              excerpt: "Units and quantities of rigid bodies, forces, moments, equilibrium analysis, and center of mass calculations. This lecture material covers fundamental concepts in engineering mechanics, focusing on the analysis of static systems and structures."
             },
             {
               title: "Production Planning and Controlling",
@@ -321,21 +370,21 @@ export default function Home() {
               link: "https://sites.google.com/ae.polman-bandung.ac.id/mekanikateknikstatika/beranda",
               excerpt: "Raw materials processing, analytical approaches to design, and management practices in manufacturing."
             },
-          ].map((mat, idx) => (
-            <article key={idx} className="border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:shadow-lg transition">
+          ].map((lect, idx) => (          
+            <article key={idx} style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)' }} className="border rounded-lg p-6 hover:shadow-lg transition">
               <h3 className="text-xl font-semibold mb-2">
-                <a href={mat.link} target="_blank" rel="noopener" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  {mat.title}
+                <a href={lect.link} target="_blank" rel="noopener" className="text-blue-600 hover:underline">
+                  {lect.title}
                 </a>
               </h3>
-              <p className="text-gray-700 dark:text-gray-300">{mat.excerpt}</p>
+              <p style={{ color: 'var(--text)' }}>{lect.excerpt}</p>
             </article>
           ))}
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 md:px-12 max-w-2xl mx-auto border-t border-gray-200 dark:border-gray-800">
+      <section id="contact" style={{ borderColor: 'var(--border)' }} className="py-20 px-6 md:px-12 max-w-6xl mx-auto border-t">
         <h1 className="text-4xl font-bold mb-8">Contact</h1>
 
         <form name="contact" method="POST" action="https://formspree.io/f/xeqwawgn" className="space-y-4 mb-8">
@@ -347,7 +396,12 @@ export default function Home() {
               type="text"
               name="name"
               id="name"
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              style={{ 
+                backgroundColor: 'var(--bg)', 
+                color: 'var(--text)', 
+                borderColor: 'var(--border)' 
+              }}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -359,7 +413,12 @@ export default function Home() {
               type="email"
               name="email"
               id="email"
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              style={{ 
+                backgroundColor: 'var(--bg)', 
+                color: 'var(--text)', 
+                borderColor: 'var(--border)' 
+              }}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -371,7 +430,12 @@ export default function Home() {
               name="message"
               id="message"
               rows={5}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              style={{ 
+                backgroundColor: 'var(--bg)', 
+                color: 'var(--text)', 
+                borderColor: 'var(--border)' 
+              }}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             ></textarea>
           </div>
@@ -383,7 +447,7 @@ export default function Home() {
           </button>
         </form>
 
-        <div className="text-gray-600 dark:text-gray-400">
+        <div style={{ color: 'var(--muted)' }}>
           <p className="font-semibold mb-2">📍 Location</p>
           <p>
             Manufacturing Automation and Mechatronics Engineering Department, Bandung Polytechnic for Manufacturing, Dago, Bandung, Indonesia, 40135
@@ -392,7 +456,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-800 py-8 px-6 text-center text-gray-600 dark:text-gray-400 mt-auto">
+      <footer style={{ borderColor: 'var(--border)', color: 'var(--muted)' }} className="border-t py-8 px-6 text-center mt-auto">
         <p>©2025, Nur Jamiludin Ramadhan</p>
       </footer>
     </main>

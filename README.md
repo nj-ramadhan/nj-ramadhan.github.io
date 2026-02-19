@@ -39,8 +39,22 @@ Read my latest posts in the [blog](./blog) section.
 ## Contact
 
 - GitHub: [@nj-ramadhan](https://github.com/nj-ramadhan)
-- Email: [nj-ramadhan@polman-bandung.ac.id]
+- Email: [nj-ramadhan@polman-bandung.ac.id](mailto:nj-ramadhan@polman-bandung.ac.id)
+
+## Deploy
+
+To locally deploy the web, build and then run the project with this command
+
+        npm run build
+        npx serve@latest out
+
+Or to run the development server:
+
+        npm run dev
+
 
 ## License
 
 This project is licensed under the MIT License - see LICENSE file for details.
+
+
