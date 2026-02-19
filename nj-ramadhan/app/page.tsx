@@ -3,7 +3,6 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <script>window.staDarkLightChooser = true;</script>
         <script>const isSiteThemeDark = false;</script>
         <script src="/js/load-theme.js"></script>
@@ -91,7 +90,7 @@ export default function Home() {
             <div className="row">
               <div className="col-12 col-lg-4">
                 <div id="profile">
-                  <Image className="avatar avatar-circle" src="/author/nj-ramadhan/avatar.jpg" alt="Nur Jamiludin Ramadhan" width={200} height={200} />
+                  <Image className="avatar avatar-circle" src="images/author/nj-ramadhan/avatar.jpg" alt="Nur Jamiludin Ramadhan" width={200} height={200} />
                   <div className="portrait-title">
                     <h2>Nur Jamiludin Ramadhan</h2>
                     <h3>Lecturer and Researcher in Manufacturing Automation and Mechatronics Engineering Department</h3>
@@ -516,7 +515,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </main>
     </div>
   );
 }
